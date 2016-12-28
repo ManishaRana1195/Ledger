@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/dp4"
+        android:background="@color/cardview_light_background"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/expense_category"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            tools:background="@drawable/ic_general" />
+        <TextView
+            android:id="@+id/expense_time"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dp8"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp14"
+            tools:text="Today" />
+        <TextView
+            android:id="@+id/expense_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginRight="@dimen/dp8"
+            android:layout_gravity="center"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:textSize="@dimen/sp14"
+            tools:text="200.0" />
+        <ImageButton
+            android:id="@+id/expense_verified_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp4"
+            android:background="@drawable/ic_verified"
+            tools:text="State" />
+
+        <ImageButton
+            android:id="@+id/expense_unverified_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp4"
+            android:background="@drawable/ic_unverified" />
+
+        <ImageButton
+            android:id="@+id/expense_fraud_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp4"
+            android:background="@drawable/ic_fraud"
+            tools:text="State" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/expense_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/lightTextColor"
+        android:background="@color/darkBackground"
+        android:padding="@dimen/dp4"
+        android:textSize="@dimen/sp16"
+        tools:text="Recharge of Idea Mobile" />
+</LinearLayout>

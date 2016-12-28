@@ -2,14 +2,14 @@ package com.geekskool.leger.Models;
 
 public class Expense {
 
-    private long id;
+    private String id;
     private String description;
-    private int amount;
+    private float amount;
     private String time;
     private Category category;
     private State state;
 
-    public Expense(long id, String description, int amount, String time, Category category, State state) {
+    public Expense(String id, String description, float amount, String time, Category category, State state) {
         this.id = id;
         this.description = description;
         this.amount = amount;
@@ -18,11 +18,11 @@ public class Expense {
         this.state = state;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -42,11 +42,11 @@ public class Expense {
         this.time = time;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

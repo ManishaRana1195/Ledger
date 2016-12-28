@@ -5,8 +5,8 @@ package com.geekskool.leger.Models;
  */
 public class FraudState extends State {
 
-    FraudState(StateOptions state) {
-        super(state);
+    public FraudState() {
+        this.state = StateOptions.FRAUD;
     }
 
     @Override

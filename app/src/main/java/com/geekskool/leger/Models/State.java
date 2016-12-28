@@ -7,10 +7,6 @@ public abstract class State {
     static final String ILLEGAL_STATE = "Illegal State";
     StateOptions state;
 
-    State(StateOptions state){
-        this.state = state;
-    }
-
     public void setState(StateOptions state) {
         this.state = state;
     }

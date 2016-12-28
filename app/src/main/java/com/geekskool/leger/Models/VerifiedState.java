@@ -5,8 +5,8 @@ package com.geekskool.leger.Models;
  */
 public class VerifiedState extends State {
 
-    VerifiedState(StateOptions state) {
-        super(state);
+    public VerifiedState() {
+        this.state = StateOptions.VERIFIED;
     }
 
     @Override
