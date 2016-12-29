@@ -4,12 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <TextView
+        android:id="@+id/expense_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:textColor="@color/lightTextColor"
+        android:background="@color/darkBackground"
+        android:padding="@dimen/dp8"
+        android:textSize="@dimen/sp16"
+        tools:text="Recharge of Idea Mobile" />
     <LinearLayout
         android:layout_width="match_parent"
         android:padding="@dimen/dp4"
         android:background="@color/cardview_light_background"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/expense_category"
             android:layout_width="wrap_content"
@@ -31,7 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginRight="@dimen/dp8"
+            android:layout_marginLeft="@dimen/dp4"
+            android:layout_marginRight="@dimen/dp4"
             android:layout_gravity="center"
             android:fontFamily="monospace"
             android:gravity="center"
@@ -60,14 +72,5 @@
             android:background="@drawable/ic_fraud"
             tools:text="State" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/expense_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed"
-        android:textColor="@color/lightTextColor"
-        android:background="@color/darkBackground"
-        android:padding="@dimen/dp4"
-        android:textSize="@dimen/sp16"
-        tools:text="Recharge of Idea Mobile" />
+
 </LinearLayout>

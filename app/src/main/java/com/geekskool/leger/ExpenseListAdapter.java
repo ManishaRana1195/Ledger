@@ -37,7 +37,7 @@ public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.
     public void onBindViewHolder(ExpenseViewHolder holder, int position) {
         Expense expense = expenses.get(position);
         holder.categoryView.setImageDrawable(ContextCompat.getDrawable(context,expense.getCategory().getResourceId()));
-        holder.timeView.setText(ExpenseUtil.getDate(expense.getTime()));
+        holder.timeView.setText(expense.getDateString());
         holder.amountView.setText(String.valueOf(expense.getAmount()));
         holder.descView.setText(expense.getDescription());
         setOnClickListeners(holder);

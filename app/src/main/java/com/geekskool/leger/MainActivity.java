@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rv_expense_list);
         expenseList = new ArrayList<>();
         new FetchExpenses().execute();
-        
+
     }
 
     public class FetchExpenses extends AsyncTask<Void, Void, ArrayList<Expense>> {
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<Expense> expenses) {
             super.onPostExecute(expenses);
             if (!expenses.isEmpty()) {
-                expenseList = expenses;
+                expenseList = ExpenseUtil.sortByDate(expenses);
                 recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 recyclerView.setAdapter(new ExpenseListAdapter(MainActivity.this,expenses));
             }

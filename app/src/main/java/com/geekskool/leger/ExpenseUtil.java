@@ -7,9 +7,9 @@ import com.geekskool.leger.Models.UnverifiedState;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by manisharana on 28/12/16.
@@ -49,17 +49,18 @@ public class ExpenseUtil {
         return expense;
     }
 
-    public static String getDate(String time) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        Date date=null;
-        try {
-            date = formatter.parse(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        formatter = new SimpleDateFormat("dd MMM, HH:mm aa");
 
-        return formatter.format(date);
+    public static ArrayList<Expense> sortByDate(ArrayList<Expense> expenses){
+
+        Comparator<Expense> comparator = new Comparator<Expense>() {
+            @Override
+            public int compare(Expense o1, Expense o2) {
+                return o2.getDate().compareTo(o1.getDate());
+            }
+        };
+
+        Collections.sort(expenses,comparator);
+        return expenses;
     }
 
 }
