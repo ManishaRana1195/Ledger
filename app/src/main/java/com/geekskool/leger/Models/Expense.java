@@ -1,10 +1,13 @@
 package com.geekskool.leger.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Expense {
+public class Expense implements Parcelable{
 
     private String id;
     private String description;
@@ -21,6 +24,16 @@ public class Expense {
         this.category = category;
         this.state = state;
     }
+
+    private Expense(Parcel in){
+        this.id = in.readString();
+        this.description = in.readString();
+        this.amount = in.readFloat();
+        this.date = in.readString();
+        this.category = in.readParcelable(Category.class.getClassLoader());
+        this.state = in.readParcelable(State.class.getClassLoader());
+    }
+
 
     public String getId() {
         return id;
@@ -81,5 +94,34 @@ public class Expense {
         }
       return parsedDate;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(description);
+        dest.writeFloat(amount);
+        dest.writeString(date);
+        dest.writeParcelable(category,flags);
+        dest.writeParcelable(state,flags);
+    }
+
+
+    public static final Parcelable.Creator<Expense> CREATOR = new Parcelable.Creator<Expense>() {
+
+        @Override
+        public Expense createFromParcel(Parcel source) {
+            return new Expense(source);
+        }
+
+        @Override
+        public Expense[] newArray(int size) {
+            return new Expense[size];
+        }
+    };
 
 }
