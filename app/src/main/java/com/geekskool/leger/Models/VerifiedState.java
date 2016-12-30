@@ -9,21 +9,21 @@ import android.os.Parcelable;
 public class VerifiedState extends State {
 
     public VerifiedState() {
-        this.state = StateOptions.VERIFIED;
+        this.stateOptions = StateOptions.VERIFIED;
     }
     private VerifiedState(Parcel in){
-        this.state = in.readParcelable(StateOptions.class.getClassLoader());
+        this.stateOptions = in.readParcelable(StateOptions.class.getClassLoader());
     }
 
 
     @Override
-    public StateOptions getState() {
+    public StateOptions getStateOptions() {
         return StateOptions.VERIFIED;
     }
     @Override
     public Result updateState(StateOptions state) {
         if(state == StateOptions.UNVERIFIED) {
-            this.state = StateOptions.VERIFIED;
+            this.stateOptions = StateOptions.VERIFIED;
             return new Result(true,null);
         }
         return new Result(false,ILLEGAL_STATE);

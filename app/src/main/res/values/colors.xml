@@ -10,5 +10,6 @@
     <color name="darkBackground">#2B313F</color>
     <color name="lightTextColor">#ffffff</color>
     <color name="lightBackground">#F0EEF0</color>
+    <color name="desc_background_color">#1e544f</color>
 
 </resources>

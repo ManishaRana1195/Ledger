@@ -10,13 +10,14 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
         android:textColor="@color/lightTextColor"
-        android:background="@color/darkBackground"
-        android:padding="@dimen/dp8"
+        android:background="@color/desc_background_color"
+        android:padding="@dimen/dp16"
+        android:textStyle="bold"
         android:textSize="@dimen/sp16"
         tools:text="Recharge of Idea Mobile" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:padding="@dimen/dp4"
+        android:padding="@dimen/dp16"
         android:background="@color/cardview_light_background"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
@@ -24,7 +25,7 @@
         <ImageView
             android:id="@+id/expense_category"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:background="@drawable/ic_general" />
         <TextView
             android:id="@+id/expense_time"
@@ -33,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="sans-serif-condensed"
             android:textStyle="bold"
             android:textSize="@dimen/sp14"
             tools:text="Today" />
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_marginLeft="@dimen/dp4"
-            android:layout_marginRight="@dimen/dp4"
+            android:layout_marginRight="@dimen/dp8"
             android:layout_gravity="center"
             android:fontFamily="monospace"
             android:gravity="center"
@@ -52,8 +53,9 @@
         <ImageButton
             android:id="@+id/expense_verified_state"
             android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/dp8"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp4"
             android:background="@drawable/ic_verified"
             tools:text="State" />
 
@@ -61,14 +63,15 @@
             android:id="@+id/expense_unverified_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp4"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/dp8"
             android:background="@drawable/ic_unverified" />
 
         <ImageButton
             android:id="@+id/expense_fraud_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp4"
+            android:visibility="gone"
             android:background="@drawable/ic_fraud"
             tools:text="State" />
     </LinearLayout>

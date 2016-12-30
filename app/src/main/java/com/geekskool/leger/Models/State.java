@@ -8,13 +8,13 @@ import android.os.Parcelable;
  */
 public abstract class State implements Parcelable{
     static final String ILLEGAL_STATE = "Illegal State";
-    StateOptions state;
+    StateOptions stateOptions;
 
     public State(){}
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(state,flags);
+        dest.writeParcelable(stateOptions,flags);
     }
 
     @Override
@@ -23,10 +23,10 @@ public abstract class State implements Parcelable{
     }
 
     abstract public Result updateState(StateOptions state);
-    public void setState(StateOptions state) {
-        this.state = state;
+    public void setStateOptions(StateOptions stateOptions) {
+        this.stateOptions = stateOptions;
     }
-    abstract public StateOptions getState();
+    abstract public StateOptions getStateOptions();
 
 
 }

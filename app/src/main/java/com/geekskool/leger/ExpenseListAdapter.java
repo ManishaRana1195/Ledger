@@ -40,6 +40,22 @@ public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.
         holder.timeView.setText(expense.getDateString());
         holder.amountView.setText(String.valueOf(expense.getAmount()));
         holder.descView.setText(expense.getDescription());
+        switch (expense.getState().getStateOptions().ordinal()){
+            case 0:
+                holder.unverifiedStateButton.setVisibility(View.VISIBLE);
+                break;
+            case 1:
+                holder.verifiedStateButton.setVisibility(View.VISIBLE);
+                holder.fraudStateButton.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                holder.unverifiedStateButton.setVisibility(View.VISIBLE);
+                break;
+            default:
+                holder.verifiedStateButton.setVisibility(View.GONE);
+                holder.unverifiedStateButton.setVisibility(View.GONE);
+                holder.fraudStateButton.setVisibility(View.GONE);
+        }
         setOnClickListeners(holder);
     }
 

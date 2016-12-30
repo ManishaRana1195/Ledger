@@ -9,23 +9,23 @@ import android.os.Parcelable;
 public class FraudState extends State {
 
     public FraudState() {
-        this.state = StateOptions.FRAUD;
+        this.stateOptions = StateOptions.FRAUD;
     }
 
     private FraudState(Parcel in){
-        this.state = in.readParcelable(StateOptions.class.getClassLoader());
+        this.stateOptions = in.readParcelable(StateOptions.class.getClassLoader());
     }
 
 
     @Override
-    public StateOptions getState() {
+    public StateOptions getStateOptions() {
         return StateOptions.FRAUD;
     }
 
     @Override
     public Result updateState(StateOptions state) {
         if(state == StateOptions.UNVERIFIED) {
-            this.state = StateOptions.FRAUD;
+            this.stateOptions = StateOptions.FRAUD;
             return new Result(true,null);
         }
         return new Result(false,ILLEGAL_STATE);
