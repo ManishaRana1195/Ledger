@@ -24,7 +24,7 @@ public class ExpenseListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_expenses, container, false);
-        ArrayList<Expense> expenseList = getArguments().getParcelableArrayList(MainActivity.EXPENSES);
+        ArrayList<Expense> expenseList = getArguments().getParcelableArrayList(ExpenseUtil.EXPENSES);
         recyclerView = (RecyclerView) root.findViewById(R.id.rv_expense_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new ExpenseListAdapter(getActivity(),expenseList));

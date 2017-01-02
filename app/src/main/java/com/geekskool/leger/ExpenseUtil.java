@@ -16,6 +16,7 @@ import java.util.Comparator;
  */
 public class ExpenseUtil {
 
+    public static final String EXPENSES = "expenses";
     private static final String RECHARGE = "Recharge";
     private static final String TAXI = "Taxi";
 

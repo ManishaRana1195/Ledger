@@ -3,7 +3,9 @@ package com.geekskool.leger;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.geekskool.leger.Models.Expense;
 
@@ -22,16 +24,19 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class SplashScreen extends AppCompatActivity {
 
+    private View rootView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
+        rootView = findViewById(android.R.id.content);
         new FetchExpenses().execute();
     }
 
     private Intent goToNext(ArrayList<Expense> expenses) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putParcelableArrayListExtra(MainActivity.EXPENSES,expenses);
+        intent.putParcelableArrayListExtra(ExpenseUtil.EXPENSES,expenses);
         return intent;
     }
 
@@ -89,12 +94,22 @@ public class SplashScreen extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<Expense> expenses) {
             super.onPostExecute(expenses);
-            if (!expenses.isEmpty()) {
+            if (isValid(expenses)) {
                 Intent intent = goToNext(expenses);
                 startActivity(intent);
                 finish();
-                //create intent else show error
+            }else {
+                Snackbar.make(rootView,R.string.enable_to_fetch,Snackbar.LENGTH_INDEFINITE).setAction(R.string.retry, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new FetchExpenses().execute();
+                    }
+                }).show();
             }
+        }
+
+        private boolean isValid(ArrayList<Expense> expenses) {
+            return expenses != null && !expenses.isEmpty();
         }
 
     }
