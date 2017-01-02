@@ -16,4 +16,5 @@
     <dimen name="dp60">60dp</dimen>
     <dimen name="sp60">60sp</dimen>
     <dimen name="dp12">12dp</dimen>
+    <dimen name="sp18">18sp</dimen>
 </resources>

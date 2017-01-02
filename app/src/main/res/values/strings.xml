@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Ledger</string>
     <string name="illegal_state" />
+    <string name="enable_to_fetch">Enable to fetch expenses</string>
+    <string name="retry">Retry</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="inr">\u20B9</string>
 </resources>
