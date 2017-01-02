@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by manisharana on 27/12/16.
  */
 public enum StateOptions implements Parcelable {
-    VERIFIED,UNVERIFIED,FRAUD;
+    verified, unverified, fraud;
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {

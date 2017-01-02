@@ -28,5 +28,19 @@ public abstract class State implements Parcelable{
     }
     abstract public StateOptions getStateOptions();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof State)) return false;
 
+        State state = (State) o;
+
+        return stateOptions == state.stateOptions;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return stateOptions.hashCode();
+    }
 }

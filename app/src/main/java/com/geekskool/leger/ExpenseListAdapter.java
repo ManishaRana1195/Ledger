@@ -22,7 +22,7 @@ public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.
     private final List<Expense> expenses;
     private Context context;
 
-    public ExpenseListAdapter(Context context,List<Expense> expenses){
+    public ExpenseListAdapter(Context context, List<Expense> expenses) {
         this.expenses = expenses;
         this.context = context;
     }
@@ -36,11 +36,11 @@ public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.
     @Override
     public void onBindViewHolder(ExpenseViewHolder holder, int position) {
         Expense expense = expenses.get(position);
-        holder.categoryView.setImageDrawable(ContextCompat.getDrawable(context,expense.getCategory().getResourceId()));
+        holder.categoryView.setImageDrawable(ContextCompat.getDrawable(context, expense.getCategory().getResourceId()));
         holder.timeView.setText(expense.getDateString());
         holder.amountView.setText(String.valueOf(expense.getAmount()));
         holder.descView.setText(expense.getDescription());
-        switch (expense.getState().getStateOptions().ordinal()){
+        switch (expense.getState().getStateOptions().ordinal()) {
             case 0:
                 holder.unverifiedStateButton.setVisibility(View.VISIBLE);
                 break;
@@ -59,7 +59,7 @@ public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.
         setOnClickListeners(holder);
     }
 
-    public void updateList(List<Expense> newList){
+    public void updateList(List<Expense> newList) {
         expenses.clear();
         expenses.addAll(newList);
         this.notifyDataSetChanged();
@@ -88,10 +88,10 @@ public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.
 
     @Override
     public int getItemCount() {
-        return expenses.size();
+        return expenses == null ? 0 : expenses.size();
     }
 
-    class ExpenseViewHolder extends RecyclerView.ViewHolder{
+    class ExpenseViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView categoryView;
         private final TextView descView;

@@ -9,7 +9,7 @@ import android.os.Parcelable;
 public class FraudState extends State {
 
     public FraudState() {
-        this.stateOptions = StateOptions.FRAUD;
+        this.stateOptions = StateOptions.fraud;
     }
 
     private FraudState(Parcel in){
@@ -19,13 +19,13 @@ public class FraudState extends State {
 
     @Override
     public StateOptions getStateOptions() {
-        return StateOptions.FRAUD;
+        return StateOptions.fraud;
     }
 
     @Override
     public Result updateState(StateOptions state) {
-        if(state == StateOptions.UNVERIFIED) {
-            this.stateOptions = StateOptions.FRAUD;
+        if(state == StateOptions.unverified) {
+            this.stateOptions = StateOptions.fraud;
             return new Result(true,null);
         }
         return new Result(false,ILLEGAL_STATE);
