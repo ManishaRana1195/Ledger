@@ -75,4 +75,9 @@ public class Category implements Parcelable {
         result = 31 * result + resourceId;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "category : '" + name + "\'";
+    }
 }

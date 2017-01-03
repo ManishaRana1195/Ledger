@@ -1,4 +1,4 @@
-package com.geekskool.leger.Activities;
+package com.geekskool.leger.Events;
 
 import com.geekskool.leger.Models.Expense;
 

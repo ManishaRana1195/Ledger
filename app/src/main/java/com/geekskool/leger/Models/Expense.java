@@ -110,6 +110,15 @@ public class Expense implements Parcelable{
         dest.writeParcelable(state,flags);
     }
 
+    @Override
+    public String toString() {
+        return "{ id : '" + id + '\'' +
+                ", description : '" + description + '\'' +
+                ", amount: " + amount +
+                ", time : '" + date + '\'' +
+                ", " + category +
+                ", " + state +  "},";
+    }
 
     public static final Parcelable.Creator<Expense> CREATOR = new Parcelable.Creator<Expense>() {
 
@@ -124,4 +133,19 @@ public class Expense implements Parcelable{
         }
     };
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Expense)) return false;
+
+        Expense expense = (Expense) o;
+
+        return id != null ? id.equals(expense.id) : expense.id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }

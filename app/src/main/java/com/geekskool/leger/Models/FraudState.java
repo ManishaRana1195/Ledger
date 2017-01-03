@@ -25,7 +25,7 @@ public class FraudState extends State {
     @Override
     public Result updateState(StateOptions state) {
         if(state == StateOptions.unverified) {
-            this.stateOptions = StateOptions.fraud;
+            this.stateOptions = state;
             return new Result(true,null);
         }
         return new Result(false,ILLEGAL_STATE);

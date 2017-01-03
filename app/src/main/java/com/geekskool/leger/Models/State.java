@@ -43,4 +43,10 @@ public abstract class State implements Parcelable{
     public int hashCode() {
         return stateOptions.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "state : '" + stateOptions.name() + "\'";
+
+    }
 }
