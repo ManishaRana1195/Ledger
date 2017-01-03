@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.MainActivity" />
-        <activity android:name=".Activities.DashboardActivity" />
 
         <service android:name=".Sync.SyncService"
             android:exported="true">

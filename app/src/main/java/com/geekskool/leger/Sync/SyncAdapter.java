@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -68,7 +69,9 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     private void postDataToServer(URL url, String expenseList) throws IOException {
         RequestBody body = RequestBody.create(JSON, expenseList);
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .writeTimeout(5, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
                 .url(url)
                 .put(body)
@@ -78,7 +81,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private String getData(URL url) throws IOException {
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(5, TimeUnit.SECONDS).build();
+        ;
         Request request = new Request.Builder()
                 .get()
                 .url(url)

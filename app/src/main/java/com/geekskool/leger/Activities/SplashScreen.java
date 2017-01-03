@@ -41,6 +41,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         registerReceiver(updateReceiver, new IntentFilter(ExpenseUtil.BROADCAST));
+        SyncAdapter.syncImmediately(this);
     }
 
     private class UpdateReceiver extends BroadcastReceiver {
@@ -52,7 +53,7 @@ public class SplashScreen extends AppCompatActivity {
             ArrayList<Expense> expenses = intent.getParcelableArrayListExtra("expenses");
             if (ExpenseUtil.isValid(expenses)) {
                 bus.postSticky(new ExpensesEvent(expenses));
-                getToNext(expenses);
+                getToNext();
                 finish();
             } else {
                 Snackbar.make(rootView, R.string.enable_to_fetch, Snackbar.LENGTH_INDEFINITE).setAction(R.string.retry, new View.OnClickListener() {
@@ -73,9 +74,8 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     @NonNull
-    private void getToNext(ArrayList<Expense> expenses) {
+    private void getToNext() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putParcelableArrayListExtra(ExpenseUtil.EXPENSES,expenses);
         startActivity(intent);
     }
 

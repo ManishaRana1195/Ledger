@@ -116,6 +116,7 @@ public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.
         completeList.set(index,expense);
         expenses.set(position,expense);
         notifyItemChanged(position);
+        notifyItemRangeChanged(position, expenses.size());
     }
 
     @Override
