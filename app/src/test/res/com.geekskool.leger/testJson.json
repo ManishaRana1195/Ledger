@@ -1,0 +1,124 @@
+{
+  "expenses": [
+    {
+      "state": "unverified",
+      "amount": 198,
+      "id": "1234350578",
+      "category": "Recharge",
+      "time": "2015-09-25T08:25:26.000Z",
+      "description": "Recharge of Idea Mobile 8477981111"
+    },
+    {
+      "state": "unverified",
+      "amount": 36,
+      "id": "1233651055",
+      "category": "Recharge",
+      "time": "2015-09-25T02:05:15.000Z",
+      "description": "Recharge of BSNL Mobile 9458111156"
+    },
+    {
+      "state": "verified",
+      "amount": 438,
+      "id": "1230128767",
+      "category": "Recharge",
+      "time": "2015-09-23T02:51:02.000Z",
+      "description": "Bill Payment of Airtel Mobile 7060128111"
+    },
+    {
+      "state": "verified",
+      "amount": 297,
+      "id": "1226617235",
+      "category": "Recharge",
+      "time": "2015-09-21T02:56:01.000Z",
+      "description": "Recharge of Idea Mobile 9639516176"
+    },
+    {
+      "state": "unverified",
+      "amount": 200,
+      "id": "1224259314",
+      "category": "Recharge",
+      "time": "2015-09-19T19:45:47.000Z",
+      "description": "Recharge of BSNL Mobile 9458111156"
+    },
+    {
+      "state": "unverified",
+      "amount": 100,
+      "id": "1220246084",
+      "category": "Recharge",
+      "time": "2015-09-17T08:05:15.000Z",
+      "description": "Recharge of BSNL Mobile 9411321111"
+    },
+    {
+      "state": "unverified",
+      "amount": 1072,
+      "id": "1203674106",
+      "category": "Recharge",
+      "time": "2015-09-08T04:31:38.000Z",
+      "description": "Bill Payment of BSNL Mobile 9412058111"
+    },
+    {
+      "state": "verified",
+      "amount": 198,
+      "id": "1202434136",
+      "category": "Recharge",
+      "time": "2015-09-07T08:58:28.000Z",
+      "description": "Recharge of Idea Mobile 8477981111"
+    },
+    {
+      "state": "unverified",
+      "amount": 200,
+      "id": "1200104056",
+      "category": "Recharge",
+      "time": "2015-09-06T02:07:36.000Z",
+      "description": "Recharge of BSNL Mobile 9458111156"
+    },
+    {
+      "state": "unverified",
+      "amount": 240,
+      "id": "1199965180",
+      "category": "Recharge",
+      "time": "2015-09-06T00:46:17.000Z",
+      "description": "Recharge of Tata Sky DTH 1042921111"
+    },
+    {
+      "state": "unverified",
+      "amount": 92,
+      "id": "e9fa6b0b5bf",
+      "category": "Taxi",
+      "time": "2015-09-26T11:57:16.000Z",
+      "description": "UBER Order #e9fa6b0b5bf"
+    },
+    {
+      "state": "unverified",
+      "amount": 105,
+      "id": "64c9a79602e",
+      "category": "Taxi",
+      "time": "2015-09-26T05:46:31.000Z",
+      "description": "UBER Order #64c9a79602e"
+    },
+    {
+      "state": "unverified",
+      "amount": 169,
+      "id": "645b3bb04a1",
+      "category": "Taxi",
+      "time": "2015-09-22T05:24:20.000Z",
+      "description": "UBER Order #645b3bb04a1"
+    },
+    {
+      "state": "fraud",
+      "amount": 106,
+      "id": "bb79711145d",
+      "category": "Taxi",
+      "time": "2015-09-21T12:20:08.000Z",
+      "description": "UBER Order #bb79711145d"
+    },
+    {
+      "state": "unverified",
+      "amount": 92,
+      "id": "fe49b616c5c",
+      "category": "Taxi",
+      "time": "2015-09-21T05:50:03.000Z",
+      "description": "UBER Order #fe49b616c5c"
+    }
+  ]
+}
