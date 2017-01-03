@@ -7,4 +7,5 @@
     <string name="inr">\u20B9</string>
     <string name="sync_account_type">leger.geekskool.com</string>
     <string name="content_authority">com.geekskool.leger.Sync</string>
+    <string name="successful_update">State updated successfully</string>
 </resources>

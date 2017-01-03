@@ -11,7 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.geekskool.leger.ExpenseUtil;
 import com.geekskool.leger.FraudExpenseFragment;
+import com.geekskool.leger.Models.Expense;
 import com.geekskool.leger.R;
 import com.geekskool.leger.UnverifiedExpenseFragment;
 import com.geekskool.leger.VerifiedExpenseFragment;
@@ -23,11 +25,14 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private ArrayList<Expense> expenseList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+        expenseList = intent.getParcelableArrayListExtra(ExpenseUtil.EXPENSES);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewDashboard(MenuItem item) {
         Intent intent = new Intent(this, DashboardActivity.class);
- //       intent.putParcelableArrayListExtra(ExpenseUtil.EXPENSES,expenseList);
+        intent.putParcelableArrayListExtra(ExpenseUtil.EXPENSES,expenseList);
         startActivity(intent);
     }
 
