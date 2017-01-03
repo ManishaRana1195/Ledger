@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
+import com.geekskool.leger.Events.ExpensesEvent;
+import com.geekskool.leger.ExpenseUtil;
 import com.geekskool.leger.Models.Expense;
 import com.geekskool.leger.R;
 import com.geekskool.leger.Sync.SyncAdapter;
@@ -23,7 +25,6 @@ public class SplashScreen extends AppCompatActivity {
 
     private View rootView;
     private UpdateReceiver updateReceiver;
-    private String BROADCAST="received";
     private EventBus bus = EventBus.getDefault();
     ;
 
@@ -33,13 +34,13 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.splash_screen);
         rootView = findViewById(android.R.id.content);
         updateReceiver = new UpdateReceiver();
-        registerReceiver(updateReceiver, new IntentFilter(BROADCAST));
         SyncAdapter.initializeSyncAdapter(this);
     }
 
-
-    private static boolean isValid(ArrayList<Expense> expenses) {
-        return expenses != null && !expenses.isEmpty();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        registerReceiver(updateReceiver, new IntentFilter(ExpenseUtil.BROADCAST));
     }
 
     private class UpdateReceiver extends BroadcastReceiver {
@@ -49,9 +50,9 @@ public class SplashScreen extends AppCompatActivity {
             Log.i(SplashScreen.class.getName(),"Got expenses");
 
             ArrayList<Expense> expenses = intent.getParcelableArrayListExtra("expenses");
-            if (isValid(expenses)) {
+            if (ExpenseUtil.isValid(expenses)) {
                 bus.postSticky(new ExpensesEvent(expenses));
-                getToNext();
+                getToNext(expenses);
                 finish();
             } else {
                 Snackbar.make(rootView, R.string.enable_to_fetch, Snackbar.LENGTH_INDEFINITE).setAction(R.string.retry, new View.OnClickListener() {
@@ -72,8 +73,9 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     @NonNull
-    private void getToNext() {
+    private void getToNext(ArrayList<Expense> expenses) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putParcelableArrayListExtra(ExpenseUtil.EXPENSES,expenses);
         startActivity(intent);
     }
 
