@@ -1,6 +1,7 @@
 package com.geekskool.leger;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,29 +9,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.geekskool.leger.Models.Expense;
+import com.geekskool.leger.Models.Result;
+import com.geekskool.leger.Models.StateOptions;
+import com.geekskool.leger.Sync.SyncAdapter;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import static com.geekskool.leger.Models.StateOptions.fraud;
+import static com.geekskool.leger.Models.StateOptions.unverified;
+import static com.geekskool.leger.Models.StateOptions.verified;
 
 /**
  * Created by manisharana on 28/12/16.
  */
 public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.ExpenseViewHolder> {
 
-    private final List<Expense> expenses;
+    private final ArrayList<Expense> expenses;
+    private final ArrayList<Expense> completeList;
     private Context context;
+    private LinearLayout rootLayout;
 
-    public ExpenseListAdapter(Context context, List<Expense> expenses) {
+    public ExpenseListAdapter(Context context, ArrayList<Expense> expenses, ArrayList<Expense> completeList) {
+        this.completeList = completeList;
         this.expenses = expenses;
         this.context = context;
     }
 
     @Override
     public ExpenseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View inflateView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_expense_view, parent, false);
-        return new ExpenseViewHolder(inflateView);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_expense_view, parent, false);
+        rootLayout = (LinearLayout) rootView.findViewById(R.id.fragment_layout);
+        return new ExpenseViewHolder(rootView);
     }
 
     @Override
@@ -40,6 +53,11 @@ public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.
         holder.timeView.setText(expense.getDateString());
         holder.amountView.setText(String.valueOf(expense.getAmount()));
         holder.descView.setText(expense.getDescription());
+        setUpStateView(holder, expense);
+        setOnClickListeners(holder,expense,position);
+    }
+
+    private void setUpStateView(ExpenseViewHolder holder, Expense expense) {
         switch (expense.getState().getStateOptions().ordinal()) {
             case 0:
                 holder.unverifiedStateButton.setVisibility(View.VISIBLE);
@@ -56,34 +74,48 @@ public class ExpenseListAdapter extends RecyclerView.Adapter<ExpenseListAdapter.
                 holder.unverifiedStateButton.setVisibility(View.GONE);
                 holder.fraudStateButton.setVisibility(View.GONE);
         }
-        setOnClickListeners(holder);
     }
 
-    public void updateList(List<Expense> newList) {
-        expenses.clear();
-        expenses.addAll(newList);
-        this.notifyDataSetChanged();
-    }
 
-    private void setOnClickListeners(ExpenseViewHolder holder) {
+    private void setOnClickListeners(ExpenseViewHolder holder, final Expense expense, final int position) {
         holder.fraudStateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                updateState(expense,fraud,position);
             }
         });
         holder.verifiedStateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                updateState(expense,verified, position);
             }
         });
         holder.unverifiedStateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                updateState(expense,unverified, position);
             }
         });
+    }
+
+    private void updateState(Expense expense, StateOptions state, int position) {
+        Result result = expense.getState().updateState(state);
+        if(result.isSuccess()){
+            updateExpenseList(position,expense);
+            SyncAdapter.postDataImmediately(context,completeList);
+            expenses.remove(position);
+            notifyItemRemoved(position);
+            Snackbar.make(rootLayout,R.string.successful_update,Snackbar.LENGTH_SHORT).show();
+        }else{
+            Snackbar.make(rootLayout,result.getErrorMsg(),Snackbar.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateExpenseList(int position, Expense expense) {
+        int index = completeList.indexOf(expense);
+        completeList.set(index,expense);
+        expenses.set(position,expense);
+        notifyItemChanged(position);
     }
 
     @Override
