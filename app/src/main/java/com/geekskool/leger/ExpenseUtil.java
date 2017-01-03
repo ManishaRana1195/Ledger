@@ -114,4 +114,14 @@ public class ExpenseUtil {
         return jsonObject.toString();
     }
 
+    public static ArrayList<Expense> getExpenseList(String result) throws JSONException {
+        ArrayList<Expense> expenseList = new ArrayList<Expense>();
+        JSONObject jsonObject = new JSONObject(result);
+        JSONArray jsonArray = jsonObject.getJSONArray(EXPENSES);
+        for (int i = 0; i < jsonArray.length(); i++)
+            expenseList.add(ExpenseUtil.getExpenseObject(jsonArray.getJSONObject(i)));
+
+        return expenseList;
+    }
+
 }

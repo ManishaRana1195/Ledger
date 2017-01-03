@@ -18,9 +18,7 @@ import com.geekskool.leger.ExpenseUtil;
 import com.geekskool.leger.Models.Expense;
 import com.geekskool.leger.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,7 +37,6 @@ import okhttp3.Response;
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     private static final String BLOB_URL = "https://jsonblob.com/api/jsonBlob/2f0cc9ad-cbf2-11e6-b16a-61c5489cb3d0";
-    private static final String EXPENSE = "expenses";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     public static final int SYNC_INTERVAL = 60 * 5;
@@ -61,7 +58,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                 postDataToServer(url, expenseList);
             }
 
-            broadcastExpenses(getExpenseList(getData(url)));
+            broadcastExpenses(ExpenseUtil.getExpenseList(getData(url)));
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
@@ -101,15 +98,6 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         getContext().sendBroadcast(i);
     }
 
-    private ArrayList<Expense> getExpenseList(String result) throws JSONException {
-        ArrayList<Expense> expenseList = new ArrayList<Expense>();
-        JSONObject jsonObject = new JSONObject(result);
-        JSONArray jsonArray = jsonObject.getJSONArray(EXPENSE);
-        for (int i = 0; i < jsonArray.length(); i++)
-            expenseList.add(ExpenseUtil.getExpenseObject(jsonArray.getJSONObject(i)));
-
-        return expenseList;
-    }
 
     public static void syncImmediately(Context context) {
         Bundle bundle = getBundle();
@@ -119,6 +107,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     @NonNull
     private static Bundle getBundle() {
         Bundle bundle = new Bundle();
+        bundle.putBoolean(ContentResolver.SYNC_EXTRAS_FORCE, true);
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
         bundle.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
         return bundle;
