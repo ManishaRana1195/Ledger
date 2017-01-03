@@ -1,4 +1,4 @@
-package com.geekskool.leger;
+package com.geekskool.leger.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,25 +11,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.geekskool.leger.Models.Expense;
-import com.geekskool.leger.Models.StateOptions;
+import com.geekskool.leger.FraudExpenseFragment;
+import com.geekskool.leger.R;
+import com.geekskool.leger.UnverifiedExpenseFragment;
+import com.geekskool.leger.VerifiedExpenseFragment;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private ArrayList<Expense> expenseList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
-        expenseList = intent.getParcelableArrayListExtra(ExpenseUtil.EXPENSES);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -38,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         TabLayout.Tab tab = tabLayout.getTabAt(1);
         if (tab != null)
             tab.select();
-
     }
 
     private void setUpTablayoutView() {
@@ -48,40 +45,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager() {
-        ExpenseUtil.sortByDate(expenseList);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        HashMap<String, ArrayList<Expense>> map = categorizeExpenses();
-        ExpenseListFragment fraudFragment = getFragment(map.get(StateOptions.fraud.name()));
-        ExpenseListFragment unverifiedFragment = getFragment(map.get(StateOptions.unverified.name()));
-        ExpenseListFragment verifiedFragment = getFragment(map.get(StateOptions.verified.name()));
-
-        adapter.addFragment(fraudFragment, "");
-        adapter.addFragment(unverifiedFragment, "");
-        adapter.addFragment(verifiedFragment, "");
+        adapter.addFragment(new FraudExpenseFragment(), "");
+        adapter.addFragment(new UnverifiedExpenseFragment(), "");
+        adapter.addFragment(new VerifiedExpenseFragment(), "");
         viewPager.setAdapter(adapter);
     }
-
-    private ExpenseListFragment getFragment(ArrayList<Expense> expenses) {
-        ExpenseListFragment fragment = new ExpenseListFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(ExpenseUtil.EXPENSES,expenses);
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
-    private HashMap<String, ArrayList<Expense>> categorizeExpenses(){
-        final HashMap<String, ArrayList<Expense>> stateBasedMap = new HashMap<>();
-        for(Expense expense:expenseList){
-            String stateName = expense.getState().getStateOptions().name();
-            ArrayList<Expense> expenses = stateBasedMap.get(stateName);
-            if(expenses == null)
-                expenses = new ArrayList<>();
-            expenses.add(expense);
-            stateBasedMap.put(stateName,expenses);
-        }
-        return stateBasedMap;
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewDashboard(MenuItem item) {
         Intent intent = new Intent(this, DashboardActivity.class);
-        intent.putParcelableArrayListExtra(ExpenseUtil.EXPENSES,expenseList);
+ //       intent.putParcelableArrayListExtra(ExpenseUtil.EXPENSES,expenseList);
         startActivity(intent);
     }
 

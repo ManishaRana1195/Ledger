@@ -1,6 +1,5 @@
-package com.geekskool.leger;
+package com.geekskool.leger.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 
 import com.geekskool.leger.Models.Category;
 import com.geekskool.leger.Models.Expense;
+import com.geekskool.leger.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,18 +25,18 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        Intent intent = getIntent();
-        LinearLayout root = (LinearLayout) findViewById(R.id.root);
-        ArrayList<Expense> expenses = intent.getParcelableArrayListExtra(ExpenseUtil.EXPENSES);
-        HashMap<Category, Float> map = categoryTotal(expenses);
-        for (Category category : map.keySet()) {
-            LinearLayout layout = getLayout();
-            ImageView imageView = getImageView(category);
-            TextView textView = getTextView(map.get(category));
-            layout.addView(imageView);
-            layout.addView(textView);
-            root.addView(layout);
-        }
+//        Intent intent = getIntent();
+//        LinearLayout root = (LinearLayout) findViewById(R.id.root);
+//        ArrayList<Expense> expenses = intent.getParcelableArrayListExtra(ExpenseUtil.EXPENSES);
+//        HashMap<Category, Float> map = categoryTotal(expenses);
+//        for (Category category : map.keySet()) {
+//            LinearLayout layout = getLayout();
+//            ImageView imageView = getImageView(category);
+//            TextView textView = getTextView(map.get(category));
+//            layout.addView(imageView);
+//            layout.addView(textView);
+//            root.addView(layout);
+//        }
     }
 
     private ImageView getImageView(Category category) {

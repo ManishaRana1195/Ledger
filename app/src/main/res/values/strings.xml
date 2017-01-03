@@ -5,4 +5,6 @@
     <string name="retry">Retry</string>
     <string name="dashboard">Dashboard</string>
     <string name="inr">\u20B9</string>
+    <string name="sync_account_type">leger.geekskool.com</string>
+    <string name="content_authority">com.geekskool.leger.Sync</string>
 </resources>
