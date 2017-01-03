@@ -10,8 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.geekskool.leger.Activities.ExpensesEvent;
+import com.geekskool.leger.Events.ExpensesEvent;
 import com.geekskool.leger.Models.Expense;
+import com.geekskool.leger.Models.StateOptions;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -23,9 +24,10 @@ public class FraudExpenseFragment extends Fragment {
 
 
     private RecyclerView recyclerView;
-    private ArrayList<Expense> expenseList=new ArrayList<>();
+    private ArrayList<Expense> expenseList = new ArrayList<>();
     private ExpenseListAdapter adapter;
     private EventBus bus = EventBus.getDefault();
+    private ArrayList<Expense> completeList = new ArrayList<>();
     ;
 
     @Override
@@ -41,15 +43,16 @@ public class FraudExpenseFragment extends Fragment {
         bus.register(this);
         recyclerView = (RecyclerView) root.findViewById(R.id.rv_expense_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new ExpenseListAdapter(getActivity(), expenseList);
+        adapter = new ExpenseListAdapter(getActivity(), expenseList, completeList);
         recyclerView.setAdapter(adapter);
         return root;
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onEvent(ExpensesEvent event){
-        expenseList= ExpenseUtil.sortByDate(event.getExpenses());
-        Log.i(FraudExpenseFragment.class.getName(),"into fragment");
+    public void onEvent(ExpensesEvent event) {
+        completeList = event.getExpenses();
+        expenseList = ExpenseUtil.sortByDate(filterExpenses(event.getExpenses()));
+        Log.i(FraudExpenseFragment.class.getName(), "into fragment");
     }
 
 
@@ -59,18 +62,15 @@ public class FraudExpenseFragment extends Fragment {
         super.onStop();
     }
 
-    //    private HashMap<String, ArrayList<Expense>> categorizeExpenses(){
-//        final HashMap<String, ArrayList<Expense>> stateBasedMap = new HashMap<>();
-//        for(Expense expense:expenseList){
-//            String stateName = expense.getState().getStateOptions().name();
-//            ArrayList<Expense> expenses = stateBasedMap.get(stateName);
-//            if(expenses == null)
-//                expenses = new ArrayList<>();
-//            expenses.add(expense);
-//            stateBasedMap.put(stateName,expenses);
-//        }
-//        return stateBasedMap;
-//    }
+    private ArrayList<Expense> filterExpenses(ArrayList<Expense> expenses) {
+        ArrayList<Expense> filtered = new ArrayList<>();
+        for (Expense expense : expenses) {
+            String stateName = StateOptions.fraud.name();
+            if (stateName.equals(expense.getState().getStateOptions().name()))
+                filtered.add(expense);
+        }
+        return filtered;
+    }
 
 
 }
